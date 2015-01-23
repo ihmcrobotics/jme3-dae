@@ -1,17 +1,18 @@
 package jme3dae.collada14.transformers;
 
-import com.jme3.bounding.BoundingBox;
-import com.jme3.scene.Geometry;
-import com.jme3.scene.Mesh;
 import java.util.List;
+
 import jme3dae.DAENode;
 import jme3dae.collada14.ColladaSpec141.Names;
-import jme3dae.transformers.ValueTransformer.TransformedValue;
 import jme3dae.utilities.Bindings;
 import jme3dae.utilities.MeasuringUnit;
 import jme3dae.utilities.PolygonArrayTransformer;
 import jme3dae.utilities.Todo;
 import jme3dae.utilities.Tuple2;
+
+import com.jme3.bounding.BoundingBox;
+import com.jme3.scene.Geometry;
+import com.jme3.scene.Mesh;
 
 /**
  * Transformed a collada polygons element in a JME3 Geometry.

@@ -1,18 +1,19 @@
 package jme3dae.collada14.transformers;
 
-import com.jme3.material.Material;
-import com.jme3.scene.Geometry;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
 import jme3dae.DAENode;
 import jme3dae.collada14.ColladaSpec141.Names;
-import jme3dae.transformers.ValueTransformer.TransformedValue;
 import jme3dae.utilities.Bindings;
 import jme3dae.utilities.Todo;
 import jme3dae.utilities.TransformerPack;
 import jme3dae.utilities.Tuple2;
+
+import com.jme3.material.Material;
+import com.jme3.scene.Geometry;
 
 /**
  * Base class for the transformers of geometric elements. Defines few methods

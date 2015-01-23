@@ -1,26 +1,27 @@
 package jme3dae.collada14.transformers;
 
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import jme3dae.DAENode;
+import jme3dae.FXEnhancerInfo;
+import jme3dae.collada14.ColladaSpec141.Names;
+import jme3dae.materials.BlinnMaterialGenerator;
+import jme3dae.materials.ConstantMaterialGenerator;
+import jme3dae.materials.FXBumpMaterialGenerator;
+import jme3dae.materials.LambertMaterialGenerator;
+import jme3dae.materials.PhongMaterialGenerator;
+import jme3dae.utilities.Conditions;
+import jme3dae.utilities.Todo;
+import jme3dae.utilities.TransformerPack;
+import jme3dae.utilities.Tuple2;
+
 import com.jme3.asset.AssetManager;
 import com.jme3.material.Material;
 import com.jme3.material.RenderState.FaceCullMode;
 import com.jme3.math.ColorRGBA;
 import com.jme3.texture.Texture;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import jme3dae.DAENode;
-import jme3dae.FXEnhancerInfo;
-import jme3dae.collada14.ColladaSpec141.Names;
-import jme3dae.transformers.ValueTransformer.TransformedValue;
-import jme3dae.materials.BlinnMaterialGenerator;
-import jme3dae.materials.ConstantMaterialGenerator;
-import jme3dae.materials.FXBumpMaterialGenerator;
-import jme3dae.utilities.Conditions;
-import jme3dae.materials.LambertMaterialGenerator;
-import jme3dae.materials.PhongMaterialGenerator;
-import jme3dae.utilities.Todo;
-import jme3dae.utilities.TransformerPack;
-import jme3dae.utilities.Tuple2;
 
 /**
  * Parses library_material elements. This transformer stores the transformed materials in the DAENode.

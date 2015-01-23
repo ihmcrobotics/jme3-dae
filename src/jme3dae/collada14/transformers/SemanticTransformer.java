@@ -2,7 +2,6 @@ package jme3dae.collada14.transformers;
 
 import jme3dae.collada14.ColladaSpec141.Semantic;
 import jme3dae.transformers.ValueTransformer;
-import jme3dae.transformers.ValueTransformer.TransformedValue;
 import jme3dae.utilities.Todo;
 
 /**

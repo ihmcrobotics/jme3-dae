@@ -1,7 +1,6 @@
 package jme3dae.utilities;
 
 import com.jme3.math.Matrix4f;
-import jme3dae.transformers.ValueTransformer.TransformedValue;
 
 public class Matrix4fTransformer implements TransformerPack<String, Matrix4f[]>
 {

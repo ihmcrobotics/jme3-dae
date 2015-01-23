@@ -1,8 +1,8 @@
 package jme3dae.collada14.transformers;
 
-import com.jme3.math.ColorRGBA;
 import jme3dae.transformers.ValueTransformer;
-import jme3dae.transformers.ValueTransformer.TransformedValue;
+
+import com.jme3.math.ColorRGBA;
 
 /**
  * Transforms a 3 or 4 float color component list (values between 0 and 1) into a

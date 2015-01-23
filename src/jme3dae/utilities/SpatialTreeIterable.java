@@ -1,9 +1,10 @@
 package jme3dae.utilities;
 
-import com.jme3.scene.Node;
-import com.jme3.scene.Spatial;
 import java.util.Iterator;
 import java.util.LinkedList;
+
+import com.jme3.scene.Node;
+import com.jme3.scene.Spatial;
 
 public class SpatialTreeIterable implements Iterable<Spatial>
 {

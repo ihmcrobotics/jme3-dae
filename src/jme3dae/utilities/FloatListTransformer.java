@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import jme3dae.transformers.ValueTransformer;
-import jme3dae.transformers.ValueTransformer.TransformedValue;
 
 /**
  * Transformed a list of white space separated float strings in a float array

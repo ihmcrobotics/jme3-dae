@@ -1,10 +1,10 @@
 package jme3dae.collada14;
 
+import jme3dae.transformers.ValueTransformer;
+
 import com.jme3.math.FastMath;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Transform;
-import com.jme3.math.Vector3f;
-import jme3dae.transformers.ValueTransformer;
 
 public abstract class ChannelTarget implements ValueTransformer<float[], Transform[]>
 {

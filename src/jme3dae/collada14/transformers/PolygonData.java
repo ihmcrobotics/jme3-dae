@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-import jme3dae.utilities.Todo;
+
 import jme3dae.utilities.Tuple2;
 import jme3dae.utilities.Vertex;
 import jme3dae.utilities.VertexSkinningData;

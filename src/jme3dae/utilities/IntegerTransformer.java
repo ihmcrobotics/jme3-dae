@@ -2,8 +2,8 @@ package jme3dae.utilities;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import jme3dae.transformers.ValueTransformer;
-import jme3dae.transformers.ValueTransformer.TransformedValue;
 
 /**
  * Transforms a string in an integer value.

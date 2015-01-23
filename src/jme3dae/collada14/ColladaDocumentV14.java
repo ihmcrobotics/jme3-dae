@@ -1,27 +1,28 @@
 package jme3dae.collada14;
 
-import com.jme3.asset.AssetManager;
-import com.jme3.material.Material;
-import com.jme3.scene.Geometry;
-import com.jme3.scene.Node;
-import com.jme3.scene.Spatial;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import jme3dae.DAENode;
 import jme3dae.FXEnhancerInfo;
 import jme3dae.collada14.ColladaSpec141.Names;
 import jme3dae.collada14.transformers.LibraryImagesTransformer;
 import jme3dae.collada14.transformers.LibraryMaterialsTransformer;
 import jme3dae.collada14.transformers.SceneTransformer;
-import jme3dae.utilities.Tuple2;
 import jme3dae.transformers.ValueTransformer;
-import jme3dae.transformers.ValueTransformer.TransformedValue;
 import jme3dae.utilities.Conditions;
 import jme3dae.utilities.FloatTransformer;
 import jme3dae.utilities.MeasuringUnit;
 import jme3dae.utilities.PlainTextTransformer;
+import jme3dae.utilities.Tuple2;
 import jme3dae.utilities.UpAxis;
+
+import com.jme3.asset.AssetManager;
+import com.jme3.material.Material;
+import com.jme3.scene.Geometry;
+import com.jme3.scene.Node;
+import com.jme3.scene.Spatial;
 
 /**
  * Parser of the root node of a COLLADA element for a collada document v. 1.4.

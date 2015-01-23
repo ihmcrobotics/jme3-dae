@@ -1,6 +1,5 @@
 package jme3dae.utilities;
 
-import jme3dae.DAENode;
 
 /**
  * Utility class to print todo tasks. The printed message includes the line of

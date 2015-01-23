@@ -1,5 +1,23 @@
 package jme3dae.collada14.transformers;
 
+import java.nio.ByteBuffer;
+import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+
+import jme3dae.DAENode;
+import jme3dae.collada14.ChannelTarget;
+import jme3dae.collada14.ColladaSpec141.Names;
+import jme3dae.collada14.ColladaSpec141.Semantic;
+import jme3dae.utilities.Bindings;
+import jme3dae.utilities.Conditions;
+import jme3dae.utilities.Matrix4fTransformer;
+import jme3dae.utilities.Tuple2;
+import jme3dae.utilities.VertexSkinningData;
+
 import com.jme3.animation.AnimControl;
 import com.jme3.animation.Animation;
 import com.jme3.animation.Bone;
@@ -17,23 +35,6 @@ import com.jme3.scene.VertexBuffer.Format;
 import com.jme3.scene.VertexBuffer.Type;
 import com.jme3.scene.VertexBuffer.Usage;
 import com.jme3.util.BufferUtils;
-import java.nio.ByteBuffer;
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import jme3dae.DAENode;
-import jme3dae.collada14.ChannelTarget;
-import jme3dae.collada14.ColladaSpec141.Names;
-import jme3dae.collada14.ColladaSpec141.Semantic;
-import jme3dae.transformers.ValueTransformer.TransformedValue;
-import jme3dae.utilities.Bindings;
-import jme3dae.utilities.Conditions;
-import jme3dae.utilities.Matrix4fTransformer;
-import jme3dae.utilities.Tuple2;
-import jme3dae.utilities.VertexSkinningData;
 
 /**
  * Transforms an instance_controller node in ... some kind of jme node.

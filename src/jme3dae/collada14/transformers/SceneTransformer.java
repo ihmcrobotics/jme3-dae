@@ -1,5 +1,22 @@
 package jme3dae.collada14.transformers;
 
+import static jme3dae.utilities.Conditions.checkTrue;
+import static jme3dae.utilities.Conditions.checkValue;
+
+import java.util.LinkedList;
+import java.util.List;
+
+import jme3dae.DAENode;
+import jme3dae.FXEnhancerInfo;
+import jme3dae.collada14.ColladaSpec141.DefaultValues;
+import jme3dae.collada14.ColladaSpec141.Names;
+import jme3dae.collada14.ColladaSpec141.NodeType;
+import jme3dae.collada14.ColladaSpec141.Semantic;
+import jme3dae.utilities.Bindings;
+import jme3dae.utilities.Todo;
+import jme3dae.utilities.TransformerPack;
+import jme3dae.utilities.Tuple2;
+
 import com.jme3.animation.Bone;
 import com.jme3.light.DirectionalLight;
 import com.jme3.light.PointLight;
@@ -11,20 +28,6 @@ import com.jme3.math.Vector3f;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
-import java.util.LinkedList;
-import java.util.List;
-import jme3dae.DAENode;
-import jme3dae.FXEnhancerInfo;
-import jme3dae.collada14.ColladaSpec141.DefaultValues;
-import jme3dae.collada14.ColladaSpec141.Names;
-import jme3dae.collada14.ColladaSpec141.NodeType;
-import jme3dae.collada14.ColladaSpec141.Semantic;
-import jme3dae.transformers.ValueTransformer.TransformedValue;
-import jme3dae.utilities.Bindings;
-import static jme3dae.utilities.Conditions.*;
-import jme3dae.utilities.Todo;
-import jme3dae.utilities.TransformerPack;
-import jme3dae.utilities.Tuple2;
 
 /**
  * Transforms a collada <scene> element. The results of the transformation are

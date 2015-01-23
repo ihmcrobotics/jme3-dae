@@ -1,7 +1,6 @@
 package jme3dae.utilities;
 
 import jme3dae.transformers.ValueTransformer;
-import jme3dae.transformers.ValueTransformer.TransformedValue;
 
 /**
  * Transforms a string in a sequence of bytes. The string is read as a hexadecimal

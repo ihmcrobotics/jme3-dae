@@ -1,5 +1,17 @@
 package jme3dae.collada14.transformers;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import jme3dae.DAENode;
+import jme3dae.FXEnhancerInfo;
+import jme3dae.collada14.ColladaSpec141.Names;
+import jme3dae.utilities.Bindings;
+import jme3dae.utilities.Conditions;
+import jme3dae.utilities.Todo;
+import jme3dae.utilities.TransformerPack;
+import jme3dae.utilities.Tuple2;
+
 import com.jme3.bounding.BoundingBox;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Mesh;
@@ -7,17 +19,6 @@ import com.jme3.scene.Node;
 import com.jme3.scene.VertexBuffer;
 import com.jme3.scene.VertexBuffer.Type;
 import com.jme3.util.TangentBinormalGenerator;
-import java.util.LinkedList;
-import java.util.List;
-import jme3dae.DAENode;
-import jme3dae.FXEnhancerInfo;
-import jme3dae.collada14.ColladaSpec141.Names;
-import jme3dae.transformers.ValueTransformer.TransformedValue;
-import jme3dae.utilities.Bindings;
-import jme3dae.utilities.Conditions;
-import jme3dae.utilities.Todo;
-import jme3dae.utilities.TransformerPack;
-import jme3dae.utilities.Tuple2;
 
 /**
  * Transforms a collada mesh element into a jme3 node. The mesh element is transformed into a Node

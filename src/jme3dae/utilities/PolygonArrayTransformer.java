@@ -1,16 +1,17 @@
 package jme3dae.utilities;
 
-import com.jme3.scene.Mesh;
-import com.jme3.scene.VertexBuffer.Type;
-import com.jme3.util.BufferUtils;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Set;
+
 import jme3dae.collada14.transformers.PolygonData;
 import jme3dae.transformers.ValueTransformer;
-import jme3dae.transformers.ValueTransformer.TransformedValue;
+
+import com.jme3.scene.Mesh;
+import com.jme3.scene.VertexBuffer.Type;
+import com.jme3.util.BufferUtils;
 
 /**
  * Transforms an array of polygons in a JME3 mesh.

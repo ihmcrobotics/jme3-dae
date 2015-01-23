@@ -1,12 +1,12 @@
 package jme3dae.collada14.transformers;
 
-import com.jme3.texture.Texture;
 import jme3dae.DAENode;
 import jme3dae.collada14.ColladaSpec141.Names;
-import jme3dae.transformers.ValueTransformer.TransformedValue;
 import jme3dae.utilities.Conditions;
 import jme3dae.utilities.Todo;
 import jme3dae.utilities.TransformerPack;
+
+import com.jme3.texture.Texture;
 
 /**
  * Transforms a texture collada element in a JME3 texture.

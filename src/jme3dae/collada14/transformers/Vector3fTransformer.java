@@ -1,8 +1,8 @@
 package jme3dae.collada14.transformers;
 
-import com.jme3.math.Vector3f;
 import jme3dae.transformers.ValueTransformer;
-import jme3dae.transformers.ValueTransformer.TransformedValue;
+
+import com.jme3.math.Vector3f;
 
 /**
  * Transfors a list of three space separated float strings in a Vector3f

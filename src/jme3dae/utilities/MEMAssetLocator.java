@@ -1,13 +1,14 @@
 package jme3dae.utilities;
 
-import com.jme3.asset.AssetInfo;
-import com.jme3.asset.AssetKey;
-import com.jme3.asset.AssetLocator;
-import com.jme3.asset.AssetManager;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import com.jme3.asset.AssetInfo;
+import com.jme3.asset.AssetKey;
+import com.jme3.asset.AssetLocator;
+import com.jme3.asset.AssetManager;
 
 /**
  * An asset locator that finds assets registered in its cache in byte array form.
