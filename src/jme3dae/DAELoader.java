@@ -48,7 +48,9 @@ public class DAELoader
          DocumentBuilderFactory fac = DocumentBuilderFactory.newInstance();
          DocumentBuilder bui = fac.newDocumentBuilder();
          Document doc = bui.parse(in);
-         root = wrap(null, doc.getDocumentElement());
+         
+         DAENodeDocumentRegistry documentRegistry = new DAENodeDocumentRegistry();
+         root = wrap(null, doc.getDocumentElement(), documentRegistry);
       }
       catch (Exception ex)
       {
@@ -80,14 +82,14 @@ public class DAELoader
     * @param node the xml node to wrap
     * @return the root of the tree of DAENodes
     */
-   private DAENode wrap(DAENode parent, Node node)
+   private static DAENode wrap(DAENode parent, Node node, DAENodeDocumentRegistry documentRegistry)
    {
-      DAENode dae = DAENode.create(parent, node);
+      DAENode dae = DAENode.create(parent, node, documentRegistry);
       NodeList children = node.getChildNodes();
       for (int i = 0; i < children.getLength(); i++)
       {
          Node child = children.item(i);
-         dae.addChild(wrap(dae, child));
+         dae.addChild(wrap(dae, child, documentRegistry));
       }
 
       return dae;

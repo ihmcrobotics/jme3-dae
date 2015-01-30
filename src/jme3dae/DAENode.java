@@ -16,46 +16,44 @@ import org.w3c.dom.Node;
 
 /**
  * Wraps a xml node and offers a few utility functions to operate on collada elements.
+ * 
+ * Cleaned up by jpratt@ihmc.us to not have static storage of stuff. This was necessary in order to reclaim memory between
+ * simulation test runs that use this. So turned this into a concrete class with no static stuff.
  * @author pgi
  */
 public class DAENode
 {
-   /**
-    * This is where collada elements with a unique id are published
-    */
-   private static final Map<Object, DAENode> DOCUMENT_REGISTRY = new HashMap<Object, DAENode>();
-
+   private final DAENode parent;
+   private final Node node;
+   private final List<DAENode> children = new LinkedList<DAENode>();
+   private final List<Object> parsedData = new LinkedList<Object>();
+   
+   private final DAENodeDocumentRegistry documentRegistry;
+   
    /**
     * Represents the null value for DAENode objects.
     */
    public static final DAENode NONE = new DAENode();
 
    /**
-    * Returns a new DAENode instance
-    * @param parent the DAENode parent of the new node
-    * @param node the xml node to wrap
-    * @return a new DAENode child of parent, wrapping node
+    * Initializes a new DAENode
+    * @param parent the parent of this node, maybe null (the node will be the
+    * root of a tree)
+    * @param node the wrapped xml node, cannot be null
+    * @throws IllegalArgumentException if node is null
     */
-   public static DAENode create(DAENode parent, Node node)
+   private DAENode(DAENode parent, Node node, DAENodeDocumentRegistry documentRegistry)
    {
-      DAENode n = new DAENode(parent, node);
-      if (node instanceof Element)
+      if (node == null)
       {
-         String id = ((Element) node).getAttribute("id");
-         if (!id.isEmpty())
-         {
-            DOCUMENT_REGISTRY.put(id, n);
-         }
+         throw new IllegalArgumentException("DAENode xml node cannot be null.");
       }
 
-      return n;
+      this.parent = parent;
+      this.node = node;
+      this.documentRegistry = documentRegistry;
    }
-
-   private final DAENode parent;
-   private final Node node;
-   private final List<DAENode> children = new LinkedList<DAENode>();
-   private final List<Object> parsedData = new LinkedList<Object>();
-
+   
    /**
     * Used for the instantiation of NONE
     */
@@ -63,7 +61,35 @@ public class DAENode
    {
       parent = null;
       node = null;
+      documentRegistry = null;
    }
+   
+   /**
+    * Returns a new DAENode instance
+    * @param parent the DAENode parent of the new node
+    * @param node the xml node to wrap
+    * @return a new DAENode child of parent, wrapping node
+    */
+   public static DAENode create(DAENode parent, Node node, DAENodeDocumentRegistry documentRegistry)
+   {
+      DAENode nodeToReturn = new DAENode(parent, node, documentRegistry);
+      if (node instanceof Element)
+      {
+         String id = ((Element) node).getAttribute("id");
+         if (!id.isEmpty())
+         {
+            nodeToReturn.addToDocumentRegistry(id, nodeToReturn); 
+         }
+      }
+
+      return nodeToReturn;
+   }
+
+   private void addToDocumentRegistry(String id, DAENode n)
+   {
+      documentRegistry.addToDocumentRegistry(id, n);
+   }
+
 
    /**
     * Access the root node of the collada document
@@ -72,13 +98,13 @@ public class DAENode
     */
    public DAENode getRootNode()
    {
-      DAENode n = this;
-      while (n.getParent().isDefined())
+      DAENode rootNodeToReturn = this;
+      while (rootNodeToReturn.getParent().isDefined())
       {
-         n = n.getParent();
+         rootNodeToReturn = rootNodeToReturn.getParent();
       }
 
-      return n;
+      return rootNodeToReturn;
    }
 
    /**
@@ -127,24 +153,6 @@ public class DAENode
    }
 
    /**
-    * Initializes a new DAENode
-    * @param parent the parent of this node, maybe null (the node will be the
-    * root of a tree)
-    * @param node the wrapped xml node, cannot be null
-    * @throws IllegalArgumentException if node is null
-    */
-   private DAENode(DAENode parent, Node node)
-   {
-      if (node == null)
-      {
-         throw new IllegalArgumentException("DAENode xml node cannot be null.");
-      }
-
-      this.parent = parent;
-      this.node = node;
-   }
-
-   /**
     * Checks if this DAENode is NONE
     * @return true if this DANENode is not DAENode.NONE, false otherwise
     */
@@ -160,18 +168,18 @@ public class DAENode
     */
    public DAENode getLinkedSource()
    {
-      DAENode r = NONE;
+      DAENode nodeToReturn = NONE;
       if (node instanceof Element)
       {
-         Element e = (Element) node;
-         String att = e.getAttribute("source");
-         if (!att.isEmpty())
+         Element element = (Element) node;
+         String attribute = element.getAttribute("source");
+         if (!attribute.isEmpty())
          {
-            return getLinkedNode(att);
+            return getLinkedNode(attribute);
          }
       }
 
-      return r;
+      return nodeToReturn;
    }
 
    /**
@@ -181,18 +189,18 @@ public class DAENode
     */
    public DAENode getLinkedURL()
    {
-      DAENode r = NONE;
+      DAENode nodeToReturn = NONE;
       if (node instanceof Element)
       {
-         Element e = (Element) node;
-         String att = e.getAttribute("url");
-         if (!att.isEmpty())
+         Element element = (Element) node;
+         String attribute = element.getAttribute("url");
+         if (!attribute.isEmpty())
          {
-            return getLinkedNode(att);
+            return getLinkedNode(attribute);
          }
       }
 
-      return r;
+      return nodeToReturn;
    }
 
    /**
@@ -268,11 +276,11 @@ public class DAENode
 
       List<String> nameList = Arrays.asList(names);
       List<DAENode> result = new LinkedList<DAENode>();
-      for (DAENode e : children)
+      for (DAENode childNode : children)
       {
-         if (nameList.contains(e.getNodeName()))
+         if (nameList.contains(childNode.getNodeName()))
          {
-            result.add(e);
+            result.add(childNode);
          }
       }
 
@@ -296,11 +304,11 @@ public class DAENode
     */
    public DAENode getChild(String name)
    {
-      for (DAENode e : children)
+      for (DAENode childNode : children)
       {
-         if (e.hasName(name))
+         if (childNode.hasName(name))
          {
-            return e;
+            return childNode;
          }
       }
 
@@ -345,9 +353,9 @@ public class DAENode
     */
    public <T> TransformedValue<T> getChildValue(String name, ValueTransformer<DAENode, T> transformer)
    {
-      DAENode n = getChild(name);
+      DAENode daeNode = getChild(name);
 
-      return n.isDefined() ? transformer.transform(n) : TransformedValue.<T>create(null);
+      return daeNode.isDefined() ? transformer.transform(daeNode) : TransformedValue.<T>create(null);
    }
 
    /**
@@ -392,18 +400,18 @@ public class DAENode
       }
 
       PlainTextTransformer parser = PlainTextTransformer.create();
-      DAENode e = getParent();
+      DAENode daeNodeToReturn = getParent();
 
-      while (e.isDefined())
+      while (daeNodeToReturn.isDefined())
       {
          // parent has sid = url
-         if (e.getAttribute("sid", parser).contains(url))
+         if (daeNodeToReturn.getAttribute("sid", parser).contains(url))
          {
-            return e;
+            return daeNodeToReturn;
          }
 
          // a child of parent has sid = url
-         for (DAENode child : e.getChildren())
+         for (DAENode child : daeNodeToReturn.getChildren())
          {
             if (child.getAttribute("sid", parser).contains(url))
             {
@@ -411,15 +419,15 @@ public class DAENode
             }
          }
 
-         e = e.getParent();
+         daeNodeToReturn = daeNodeToReturn.getParent();
       }
 
-      if ((!e.isDefined()) && DOCUMENT_REGISTRY.containsKey(url))
+      if ((!daeNodeToReturn.isDefined()) && documentRegistry.containsURLKey(url))
       {
-         e = DOCUMENT_REGISTRY.get(url);
+         daeNodeToReturn = documentRegistry.getFromDocumentRegistry(url);
       }
 
-      return e;
+      return daeNodeToReturn;
    }
 
    /**
