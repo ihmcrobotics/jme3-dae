@@ -19,8 +19,8 @@ public class ExAnimTest extends SimpleApplication
    {
       ColladaDocumentFactory.setFXEnhance(FXEnhancerInfo.create(FXEnhancerInfo.IgnoreMeasuringUnit.ON));
       String base = "file:///home/pgi/3d models/";
-      assetManager.registerLoader(ColladaLoader.class.getName(), "dae");
-      assetManager.registerLocator(base, UrlLocator.class.getName());
+      assetManager.registerLoader(ColladaLoader.class, "dae");
+      assetManager.registerLocator(base, UrlLocator.class);
       Spatial node = assetManager.loadModel(base + "mech001.dae");
       final ExplicitAnimationNode animation = ExplicitAnimationNode.createFrom((Node) node);
       rootNode.attachChild(animation);
