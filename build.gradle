@@ -1,0 +1,26 @@
+plugins {
+   id 'us.ihmc.gradle.ihmc-build' version '0.0.10'
+}
+
+group = 'us.ihmc.thirdparty.jme3' // add more to the path if you need
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+version = '1.0.1'
+
+repositories ihmc.ihmcDefaultArtifactProxies()
+
+repositories {
+	maven{
+		url 'http://updates.jmonkeyengine.org/maven'
+	}
+}
+
+dependencies {
+	    compile group: 'com.jme3', name: 'jme3-core', version: '3.1.0-SNAPSHOT'
+	    compile group: 'com.jme3', name: 'jme3-desktop', version: '3.1.0-SNAPSHOT'
+}
+
+jar {
+	// jar and manifest stuff go here
+}
+
