@@ -51,3 +51,38 @@ publishing {
       }
    }
 }
+
+bintray {
+   user = project.hasProperty("bintray_user") ? project.bintray_user : "invalid"
+   key = project.hasProperty("bintray_key") ? project.bintray_key : "invalid"
+
+   if (user.equals("invalid")) {
+      project.logger.debug("Bintray user name property not set. Please set the 'bintray_user' property in ~/.gradle/gradle.properties. See https://github.com/bintray/gradle-bintray-plugin")
+   }
+
+   if (key.equals("invalid")) {
+      project.logger.debug("Bintray API key property not set. Please set the 'bintray_key' property in ~/.gradle/gradle.properties. See https://github.com/bintray/gradle-bintray-plugin")
+   }
+
+   dryRun = false
+   publish = false
+
+   publications = ["mavenJava"]
+
+   pkg {
+      repo = "maven-vendor"
+      userOrg = "ihmcrobotics"
+      name = "jme3-dae"
+      desc = "Maven artifact providing jMonkeyEngine Collada loading plugin"
+
+      vcsUrl = "https://github.com/ihmcrobotics/jme3-dae.git"
+
+      licenses = ['BSD 3-Clause']
+      labels = ['java', 'jmonkeyengine', 'plugin', 'vendored', 'collada']
+
+      version {
+         name = project.version
+         released = new Date()
+      }
+   }
+}
