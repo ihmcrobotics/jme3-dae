@@ -1,6 +1,10 @@
 plugins {
-   id 'us.ihmc.gradle.ihmc-build' version '0.0.10'
+   id 'us.ihmc.gradle.ihmc-build' version '0.0.12'
+   id "com.jfrog.bintray" version "1.6"
 }
+
+apply plugin: 'java'
+apply plugin: 'maven-publish'
 
 group = 'us.ihmc.thirdparty.jme3' // add more to the path if you need
 sourceCompatibility = 1.7
@@ -10,17 +14,40 @@ version = '1.0.1'
 repositories ihmc.ihmcDefaultArtifactProxies()
 
 repositories {
-	maven{
-		url 'http://updates.jmonkeyengine.org/maven'
-	}
+   maven {
+      url 'http://updates.jmonkeyengine.org/maven'
+   }
 }
 
 dependencies {
-	    compile group: 'com.jme3', name: 'jme3-core', version: '3.1.0-SNAPSHOT'
-	    compile group: 'com.jme3', name: 'jme3-desktop', version: '3.1.0-SNAPSHOT'
+   compile group: 'com.jme3', name: 'jme3-core', version: '3.1.0-SNAPSHOT'
+   compile group: 'com.jme3', name: 'jme3-desktop', version: '3.1.0-SNAPSHOT'
 }
 
 jar {
-	// jar and manifest stuff go here
+   manifest {
+      attributes(
+              "Created-By": "IHMC Gradle Build Script")
+   }
 }
 
+task sourceJar(type: Jar) {
+   from sourceSets.main.allJava
+}
+
+publishing {
+   publications {
+      mavenJava(MavenPublication) {
+
+         groupId 'us.ihmc.thirdparty.jme3'
+         artifactId project.name
+         version project.version
+
+         from components.java
+
+         artifact sourceJar {
+            classifier "sources"
+         }
+      }
+   }
+}
